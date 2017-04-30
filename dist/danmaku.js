@@ -75,9 +75,18 @@ var allocate = function(cmt) {
   crs.splice(last + 1, curr - last - 1, crObj);
 
   if (cmt.mode === 'bottom') {
-    return this.height - cmt.height - channel % this.height;
+    var bottomY = this.height - cmt.height - channel % this.height;
+    if (this.reverse) {
+      return this.height - (bottomY + cmt.height);
+    }
+    return bottomY;
   }
-  return channel % (this.height - cmt.height);
+
+  var y = channel % (this.height - cmt.height);
+  if (this.reverse) {
+    return this.height - (y + cmt.height);
+  }
+  return y;
 };
 
 var createCommentNode = function(cmt) {
@@ -433,6 +442,7 @@ var initMixin = function(Danmaku) {
     this._hasInitContainer = !!opt.container;
     this.container = opt.container;
     this.visible = true;
+    this.reverse = !!opt.reverse;
 
     this.engine = (opt.engine || 'DOM').toLowerCase();
     this._useCanvas = (this.engine === 'canvas');

@@ -21,6 +21,7 @@ export default function(Danmaku) {
     this._hasInitContainer = !!opt.container;
     this.container = opt.container;
     this.visible = true;
+    this.reverse = !!opt.reverse;
 
     this.engine = (opt.engine || 'DOM').toLowerCase();
     this._useCanvas = (this.engine === 'canvas');

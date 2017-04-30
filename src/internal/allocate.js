@@ -45,7 +45,16 @@ export default function(cmt) {
   crs.splice(last + 1, curr - last - 1, crObj);
 
   if (cmt.mode === 'bottom') {
-    return this.height - cmt.height - channel % this.height;
+    var bottomY = this.height - cmt.height - channel % this.height;
+    if (this.reverse) {
+      return this.height - (bottomY + cmt.height);
+    }
+    return bottomY;
   }
-  return channel % (this.height - cmt.height);
+
+  var y = channel % (this.height - cmt.height);
+  if (this.reverse) {
+    return this.height - (y + cmt.height);
+  }
+  return y;
 }
