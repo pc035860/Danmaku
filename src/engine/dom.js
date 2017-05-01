@@ -60,7 +60,7 @@ export default function() {
     }
     var totalWidth = this.width + cmt.width;
     var elapsed = totalWidth * (dn - cmt._utc) * pbr / this.duration;
-    elapsed |= 0;
+    // elapsed |= 0;
     if (cmt.mode === 'ltr') cmt.x = elapsed - cmt.width;
     if (cmt.mode === 'rtl') cmt.x = this.width - elapsed;
     cmt.node.style[transform] = 'translate(' + cmt.x + 'px,' + cmt.y + 'px)';
